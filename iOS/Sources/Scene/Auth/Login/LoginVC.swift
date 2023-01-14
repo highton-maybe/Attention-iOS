@@ -7,12 +7,12 @@ import RxCocoa
 class LoginVC: BaseVC {
     private let viewModel = LoginViewModel()
     private let logoImageView = UIImageView().then {
-        $0.image = AttentionAsset.logo.image
+        $0.image = AttentionAsset.Image.logo.image
     }
     private let loginLabel = UILabel().then {
         $0.text = "Login"
         $0.font = UIFont(font: AttentionFontFamily.Pretendard.bold, size: 25)
-        $0.textColor = AttentionAsset.main.color
+        $0.textColor = AttentionAsset.Assets.main.color
     }
     private let emailTextField = UITextField().then {
         $0.setTextField(forTextField: $0, placeholderText: "E-mail")

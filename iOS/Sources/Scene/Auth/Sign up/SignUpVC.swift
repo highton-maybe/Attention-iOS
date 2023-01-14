@@ -8,12 +8,12 @@ class SignUpVC: BaseVC {
     private let viewModel = SignUpViewModel()
     private var passwordCheck = false
     private let logoImageView = UIImageView().then {
-        $0.image = AttentionAsset.logo.image
+        $0.image = AttentionAsset.Image.logo.image
     }
     private let signupLabel = UILabel().then {
         $0.text = "Sign up"
         $0.font = UIFont(font: AttentionFontFamily.Pretendard.bold, size: 25)
-        $0.textColor = AttentionAsset.main.color
+        $0.textColor = AttentionAsset.Assets.main.color
     }
     private let signUpScrollView = UIScrollView().then {
         $0.showsHorizontalScrollIndicator = false
@@ -50,7 +50,7 @@ class SignUpVC: BaseVC {
     }
     private let backButton = UIButton(type: .system).then {
         $0.setImage(UIImage(systemName: "chevron.left"), for: .normal)
-        $0.tintColor = AttentionAsset.main.color
+        $0.tintColor = AttentionAsset.Assets.main.color
     }
     private let majorTextView = UITextView().then {
         $0.setTextView(forTextView: $0, placeholderText: "분야를 적어주세요 ex) 기타, 보컬")
@@ -80,19 +80,19 @@ class SignUpVC: BaseVC {
                 if majorTextView.text == "분야를 적어주세요 ex) 기타, 보컬" {
                     majorTextView.text = ""
                     signupButton.isEnabled = true
-                    signupButton.backgroundColor = AttentionAsset.main.color
+                    signupButton.backgroundColor = AttentionAsset.Assets.main.color
                 }
             }).disposed(by: disposeBag)
         passwordCheckTextField.rx.text
             .orEmpty
             .map { $0 != "" && $0 == self.passwordTextField.text }
             .subscribe(onNext: { [self] in
-                passwordCheck = $0
+//                passwordCheck = $0
                 switch $0 {
                 case true:
-                    passwordCheckImageView.image = AttentionAsset.check.image
+                    passwordCheckImageView.image = AttentionAsset.Image.check.image
                 default:
-                    passwordCheckImageView.image = AttentionAsset.nocheck.image
+                    passwordCheckImageView.image = AttentionAsset.Image.nocheck.image
                 }
             }).disposed(by: disposeBag)
     }
@@ -111,7 +111,7 @@ class SignUpVC: BaseVC {
             nextButton.isEnabled = $0
             signUpScrollView.isScrollEnabled = $0
             if $0 == true && passwordCheck {
-                nextButton.tintColor = AttentionAsset.main.color
+                nextButton.tintColor = AttentionAsset.Assets.main.color
             }
         }).disposed(by: disposeBag)
         output.signUpResult.subscribe(onNext: { [self] in
