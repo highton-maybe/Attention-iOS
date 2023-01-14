@@ -78,7 +78,7 @@ class HomeVC: BaseVC {
         festivalButton.setHomeButtonStatus(status: .none, title: "축제")
 
         profileButton.rx.tap.subscribe(onNext: {
-            let signUpVC = HomeDetailVC()
+            let signUpVC = MyPageVC()
             self.navigationController?.pushViewController(signUpVC, animated: true)
         }).disposed(by: disposeBag)
 
