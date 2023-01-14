@@ -11,53 +11,61 @@ class HomeDetailVC: BaseVC {
 
     private let backImageButton = UIButton()
 
-    private let titleLabel = UILabel().then {
+    let titleLabel = UILabel().then {
         $0.font = UIFont(name: AttentionFontFamily.Pretendard.medium.name, size: 18.0)
         $0.textColor = AttentionAsset.Assets.gray900.color
     }
 
-    private let dateLabel = UILabel().then {
+    let dateLabel = UILabel().then {
         $0.font = UIFont(name: AttentionFontFamily.Pretendard.medium.name, size: 15.0)
         $0.textColor = AttentionAsset.Assets.gray400.color
     }
 
-    private let sponsorLabel = UILabel().then {
+    let sponsorLabel = UILabel().then {
         $0.font = UIFont(name: AttentionFontFamily.Pretendard.medium.name, size: 15.0)
         $0.textColor = AttentionAsset.Assets.gray300.color
     }
 
     private let line = UIView().then {
-        $0.backgroundColor = AttentionAsset.Assets.gray100.color
+        $0.backgroundColor = AttentionAsset.Assets.gray200.color
     }
 
-    private let contentTextView = UITextView().then {
+    let contentTextView = UITextView().then {
         $0.font = UIFont(font: AttentionFontFamily.Pretendard.regular, size: 16)
     }
 
+    let applyButton = UIButton(type: .system).then {
+        $0.setTitle("오디션 신청하기", for: .normal)
+        $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 18)
+        $0.layer.cornerRadius = 8
+        $0.layer.shadowOffset = CGSize(width: 0, height: 1)
+        $0.layer.shadowOpacity = 0.05
+        $0.layer.shadowRadius = 8
+        $0.setTitleColor(AttentionAsset.Assets.gray25.color, for: .normal)
+        $0.backgroundColor = AttentionAsset.Assets.main.color
+
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = false
+    }
+
+    override func configureVC() {
+        applyButton.rx.tap.subscribe(onNext: {
+            self.navigationController?.popViewController(animated: true)
+        }).disposed(by: disposeBag)
+    }
     override func addView() {
         [
-            backImageView,
-            backImageButton,
             titleLabel,
             dateLabel,
             sponsorLabel,
             line,
-            contentTextView
+            contentTextView,
+            applyButton
         ].forEach { view.addSubview($0) }
     }
 
     override func setLayout() {
-        backImageView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(30)
-            $0.height.equalTo(28)
-            $0.leading.equalTo(24)
-            $0.top.equalTo(12)
-        }
-
-        backImageButton.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(51)
             $0.leading.trailing.equalToSuperview().inset(24)
@@ -80,6 +88,16 @@ class HomeDetailVC: BaseVC {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(146)
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.height.equalTo(1)
+        }
+        contentTextView.snp.makeConstraints {
+            $0.top.equalTo(line.snp.bottom)
+            $0.bottom.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(24)
+        }
+        applyButton.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.height.equalTo(49)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(10)
         }
     }
 }

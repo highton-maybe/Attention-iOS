@@ -7,7 +7,7 @@ import RxCocoa
 class LoginVC: BaseVC {
     private let viewModel = LoginViewModel()
     private let logoImageView = UIImageView().then {
-        $0.image = AttentionAsset.Assets.logo.image
+        $0.image = AttentionAsset.Image.logo.image
     }
     private let loginLabel = UILabel().then {
         $0.text = "Login"
@@ -36,7 +36,7 @@ class LoginVC: BaseVC {
         )
         let output = viewModel.transform(input)
         output.result.subscribe(onNext: {
-            $0 ? print(Token.accessToken):print("로그인 실패")
+            $0 ? self.dismiss(animated: true) : print("로그인 실패")
         }).disposed(by: disposeBag)
     }
     override func configureVC() {

@@ -1,21 +1,25 @@
 import UIKit
 
 final class MainViewTC: BaseTC {
-    private let title: String
-    private let date: String
-    private let sponsor: String
-
+    var title: String
+    var date: String
+    var sponsor: String
+    var id: Int
+    var content: String
     init(
         title: String,
         date: String,
-        sponsor: String
+        sponsor: String,
+        id: Int,
+        content: String
     ) {
         self.title = title
         self.date = date
         self.sponsor = sponsor
+        self.id = id
+        self.content = content
         super.init(style: .default, reuseIdentifier: "Main")
     }
-
     private let backView = UIView().then {
         $0.backgroundColor = AttentionAsset.Assets.gray50.color
         $0.setShadow(radius: 8)

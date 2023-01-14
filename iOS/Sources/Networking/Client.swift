@@ -6,11 +6,14 @@ enum API {
     case signUp(name: String, email: String, password: String, phoneNumber: String, major: String)
     case addFestival(title: String, content: String, date: String)
     case addAudition(title: String, content: String, start: String, end: String)
+    case getAudition
+    case getFestival
+    case postAudtition(recruitId: Int)
 }
 
 extension API: TargetType {
     var baseURL: URL {
-        return URL(string: "https://087c-118-129-228-11.jp.ngrok.io")!
+        return URL(string: "https://7980-118-129-228-11.jp.ngrok.io")!
     }
 
     var path: String {
@@ -23,12 +26,20 @@ extension API: TargetType {
             return "/schedule"
         case .addAudition:
             return "/recruit"
+        case .getAudition:
+            return "/recruit"
+        case .getFestival:
+            return "/schedule"
+        case .postAudtition(let recruitId):
+            return "/schedule/\(recruitId)"
         }
     }
     var method: Moya.Method {
         switch self {
-        case .login, .signUp, .addFestival, .addAudition:
+        case .login, .signUp, .addFestival, .addAudition, .postAudtition:
             return .post
+        case .getAudition, .getFestival:
+            return .get
         }
     }
     var task: Task {
@@ -63,8 +74,8 @@ extension API: TargetType {
                                             "recruitStartDate": start,
                                             "recruitEndDate": end
                                         ], encoding: JSONEncoding.prettyPrinted)
-            //        default:
-            //            return .requestPlain
+        default:
+            return .requestPlain
         }
     }
 
@@ -72,7 +83,7 @@ extension API: TargetType {
         switch self {
         case .login, .signUp:
             return Header.tokenIsEmpty.header()
-        case .addFestival, .addAudition:
+        case .addFestival, .addAudition, .getAudition, .getFestival, .postAudtition:
             return Header.accessToken.header()
         }
     }

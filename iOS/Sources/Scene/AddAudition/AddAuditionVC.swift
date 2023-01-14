@@ -24,6 +24,9 @@ class AddAuditionVC: BaseVC {
     private let makeButton = UIButton(type: .system).then {
         $0.setAuthButton(forButton: $0, title: "오디션 생성하기", color: "Main")
     }
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = false
+    }
     override func bind() {
         let input = AddAuditionViewModel.Input(
             title: titleTextField.rx.text.orEmpty.asDriver(),
@@ -49,10 +52,6 @@ class AddAuditionVC: BaseVC {
                     detailTextView.text = ""
                 }
             }).disposed(by: disposeBag)
-        makeButton.rx.tap.subscribe(onNext: {
-            let festival = AddFestival()
-            self.navigationController?.pushViewController(festival, animated: true)
-        }).disposed(by: disposeBag)
     }
     override func addView() {
         [

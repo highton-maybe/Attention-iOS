@@ -4,7 +4,7 @@ import Then
 import RxSwift
 import RxCocoa
 
-class AddFestival: BaseVC {
+class AddFestivalVC: BaseVC {
     private let viewModel = AddFestivalViewModel()
     private let titleTextField = UITextField().then {
         $0.setTextField(forTextField: $0, placeholderText: "축제 이름")
@@ -23,6 +23,9 @@ class AddFestival: BaseVC {
     }
     private let makeButton = UIButton(type: .system).then {
         $0.setAuthButton(forButton: $0, title: "축제 생성하기", color: "Main")
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = false
     }
     override func bind() {
         let input = AddFestivalViewModel.Input(

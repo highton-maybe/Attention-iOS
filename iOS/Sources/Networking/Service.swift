@@ -42,6 +42,26 @@ final class Service {
             }
             .catch {[unowned self] in return .just(setNetworkError($0))}
     }
+    func getRecruit() -> Single<([GetRecruitModel], StatusCodeResult)> {
+        return provider.rx.request(.getAudition)
+            .filterSuccessfulStatusCodes()
+            .map([GetRecruitModel].self)
+            .map { return ($0, .getOk) }
+            .catch { error in
+                print(error)
+                return .just(([], .fault))
+            }
+    }
+    func getSchedule() -> Single<([GetScheduleModel], StatusCodeResult)> {
+        return provider.rx.request(.getAudition)
+            .filterSuccessfulStatusCodes()
+            .map([GetScheduleModel].self)
+            .map { return ($0, .getOk)}
+            .catch { error in
+                print(error)
+                return .just(([], .fault))
+            }
+    }
     func setNetworkError(_ error: Error) -> StatusCodeResult {
             print(error)
             print(error.localizedDescription)
