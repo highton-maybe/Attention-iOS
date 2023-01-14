@@ -12,7 +12,7 @@ extension UITextField {
             string: placeholderText,
             attributes: [NSAttributedString.Key.foregroundColor: UIColor(named: "Gray600")!]
         )
-        forTextField.font = UIFont(name: "Pretendard-Regular", size: 16)
+        forTextField.font = UIFont(font: AttentionFontFamily.Pretendard.regular, size: 16)
         forTextField.layer.cornerRadius = 8
         forTextField.layer.borderWidth = 1
         forTextField.layer.borderColor = UIColor(named: "Gray200")?.cgColor
