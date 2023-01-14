@@ -14,13 +14,14 @@ class BaseVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "Gray50")
+        addView()
+        setLayout()
         configureVC()
         bind()
     }
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        addView()
-        setLayout()
+
     }
 
     func addView() {}
