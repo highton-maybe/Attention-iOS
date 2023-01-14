@@ -56,6 +56,21 @@ class HomeVC: BaseVC {
         $0.backgroundColor = AttentionAsset.Assets.gray100.color
     }
 
+    private let addButtonView = UIView().then {
+        $0.setShadow(radius: 8)
+        $0.layer.cornerRadius = 8
+        $0.backgroundColor = AttentionAsset.Assets.main.color
+    }
+
+    private let addButtonIcon = UIImageView().then {
+        $0.image = AttentionAsset.Image.pencil.image
+    }
+
+    private let addButtonLabel = UILabel().then {
+        $0.font = UIFont(name: AttentionFontFamily.Pretendard.semiBold.name, size: 14)
+        $0.textColor = AttentionAsset.Assets.gray25.color
+    }
+
     override func configureVC() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -63,7 +78,7 @@ class HomeVC: BaseVC {
         festivalButton.setHomeButtonStatus(status: .none, title: "축제")
 
         profileButton.rx.tap.subscribe(onNext: {
-            let signUpVC = SignUpVC()
+            let signUpVC = HomeDetailVC()
             self.navigationController?.pushViewController(signUpVC, animated: true)
         }).disposed(by: disposeBag)
 
@@ -79,10 +94,12 @@ class HomeVC: BaseVC {
             if type == .festival {
                 self.auditionButton.setHomeButtonStatus(status: .none, title: "오디션")
                 self.festivalButton.setHomeButtonStatus(status: .selected, title: "축제")
+                self.addButtonLabel.text = "일정 생성"
             }
             if type == .audition {
                 self.auditionButton.setHomeButtonStatus(status: .selected, title: "오디션")
                 self.festivalButton.setHomeButtonStatus(status: .none, title: "축제")
+                self.addButtonLabel.text = "오디션 생성"
             }
         }.disposed(by: disposeBag)
     }
@@ -96,20 +113,27 @@ class HomeVC: BaseVC {
             auditionButton,
             festivalButton,
             line,
-            tableView
+            tableView,
+            addButtonView
         ].forEach { self.view.addSubview($0) }
 
         bannerScrollView.addSubview(bannerContentView)
+
         [
             bannerView1,
             bannerView2,
             bannerView3
         ].forEach { bannerContentView.addSubview($0) }
+
+        [
+            addButtonIcon,
+            addButtonLabel
+        ].forEach { addButtonView.addSubview($0) }
     }
 
     override func setLayout() {
         logoImageView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(22)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(22)
             $0.leading.equalTo(19)
             $0.width.equalTo(113)
             $0.height.equalTo(31)
@@ -118,7 +142,7 @@ class HomeVC: BaseVC {
         profileImageView.snp.makeConstraints {
             $0.width.height.equalTo(30)
             $0.trailing.equalTo(-30)
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(23)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(23)
         }
 
         profileButton.snp.makeConstraints {
@@ -180,6 +204,23 @@ class HomeVC: BaseVC {
         tableView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalToSuperview()
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(354)
+        }
+
+        addButtonView.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(10)
+            $0.trailing.equalTo(-24)
+            $0.height.equalTo(56)
+        }
+
+        addButtonIcon.snp.makeConstraints {
+            $0.top.leading.bottom.equalToSuperview().inset(16)
+            $0.width.height.equalTo(24)
+        }
+
+        addButtonLabel.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview().inset(18)
+            $0.leading.equalTo(45)
+            $0.trailing.equalTo(-20)
         }
     }
 }
