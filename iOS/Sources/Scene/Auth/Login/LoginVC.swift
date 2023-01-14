@@ -7,7 +7,7 @@ import RxCocoa
 class LoginVC: BaseVC {
     private let viewModel = LoginViewModel()
     private let logoImageView = UIImageView().then {
-        $0.image = AttentionAsset.Image.logo.image
+        $0.image = AttentionAsset.Assets.logo.image
     }
     private let loginLabel = UILabel().then {
         $0.text = "Login"

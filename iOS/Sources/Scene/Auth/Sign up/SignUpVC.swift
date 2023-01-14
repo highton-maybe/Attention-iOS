@@ -8,7 +8,7 @@ class SignUpVC: BaseVC {
     private let viewModel = SignUpViewModel()
     private var passwordCheck = false
     private let logoImageView = UIImageView().then {
-        $0.image = AttentionAsset.Image.logo.image
+        $0.image = AttentionAsset.Assets.logo.image
     }
     private let signupLabel = UILabel().then {
         $0.text = "Sign up"
@@ -90,9 +90,9 @@ class SignUpVC: BaseVC {
 //                passwordCheck = $0
                 switch $0 {
                 case true:
-                    passwordCheckImageView.image = AttentionAsset.Image.check.image
+                    passwordCheckImageView.image = AttentionAsset.check.image
                 default:
-                    passwordCheckImageView.image = AttentionAsset.Image.nocheck.image
+                    passwordCheckImageView.image = AttentionAsset.nocheck.image
                 }
             }).disposed(by: disposeBag)
     }
