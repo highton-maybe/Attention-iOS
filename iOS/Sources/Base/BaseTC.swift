@@ -6,8 +6,8 @@ class BaseTC: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.addView()
-        self.setLayout()
         self.configureVC()
+        self.setLayout()
     }
 
     @available(*, unavailable)
@@ -16,7 +16,6 @@ class BaseTC: UITableViewCell {
     }
 
     func addView() {}
-    func setLayout() {}
     func configureVC() {}
-
+    func setLayout() {}
 }
