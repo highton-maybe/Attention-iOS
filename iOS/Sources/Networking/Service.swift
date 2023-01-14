@@ -3,7 +3,7 @@ import RxSwift
 import RxCocoa
 import Moya
 import RxMoya
-// swiftlint:disable line_length
+
 final class Service {
 
     let provider = MoyaProvider<API>(plugins: [MoyaLoggingPlugin()])

@@ -63,6 +63,7 @@ class SignUpVC: BaseVC {
             phoneNumberTextField
         ].forEach { signUpContentView.addSubview($0) }
     }
+    
     override func setLayout() {
         logoImageView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(111)
@@ -130,7 +131,7 @@ extension SignUpVC: UIScrollViewDelegate {
     private func setPageControl() {
         pageControl.numberOfPages = 2
     }
-    private func setPageControlSelectedPage(currentPage:Int) {
+    private func setPageControlSelectedPage(currentPage: Int) {
         pageControl.currentPage = currentPage
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

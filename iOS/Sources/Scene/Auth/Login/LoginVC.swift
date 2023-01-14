@@ -27,12 +27,12 @@ class LoginVC: BaseVC {
         $0.setAuthButton(forButton: $0, title: "Sign up", color: "Gray200")
     }
     override func configureVC() {
-        signupButton.rx.tap.bind {
-            let vc = SignUpVC()
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
+        signupButton.rx.tap.subscribe(onNext: {
+            let signUpVC = SignUpVC()
+            self.navigationController?.pushViewController(signUpVC, animated: true)
+        }).disposed(by: disposeBag)
     }
-    
+
     override func addView() {
         [
             logoImageView,

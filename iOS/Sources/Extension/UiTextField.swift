@@ -8,7 +8,10 @@ extension UITextField {
         self.leftViewMode = ViewMode.always
     }
     func setTextField(forTextField: UITextField, placeholderText: String) {
-        forTextField.attributedPlaceholder = NSAttributedString(string: placeholderText, attributes: [NSAttributedString.Key.foregroundColor : UIColor(named: "Gray600")!])
+        forTextField.attributedPlaceholder = NSAttributedString(
+            string: placeholderText,
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor(named: "Gray600")!]
+        )
         forTextField.font = UIFont(name: "Pretendard-Regular", size: 16)
         forTextField.layer.cornerRadius = 8
         forTextField.layer.borderWidth = 1

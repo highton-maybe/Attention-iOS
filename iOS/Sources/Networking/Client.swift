@@ -16,7 +16,7 @@ extension API: TargetType {
         return .get
     }
     var task: Task {
-        return .requestParameters(parameters: ["df":"df"], encoding: URLEncoding.default)
+        return .requestParameters(parameters: ["df": "df"], encoding: URLEncoding.default)
     }
 
     var headers: [String: String]? {
