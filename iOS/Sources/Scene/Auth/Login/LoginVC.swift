@@ -21,6 +21,7 @@ class LoginVC: BaseVC {
     private let passwordTextField = UITextField().then {
         $0.setTextField(forTextField: $0, placeholderText: "Password")
         $0.addLeftPadding()
+        $0.isSecureTextEntry = true
     }
     private let loginButton = UIButton(type: .system).then {
         $0.setAuthButton(forButton: $0, title: "Login", color: "Main")
@@ -34,7 +35,7 @@ class LoginVC: BaseVC {
             password: passwordTextField.rx.text.orEmpty.asDriver(),
             loginButtonDidTap: loginButton.rx.tap.asSignal()
         )
-        let output = viewModel.transform(input)
+        let output = viewModel.transform(input)#imageLiteral(resourceName: "simulator_screenshot_7418CA4F-6F38-470A-BC09-CFB5D436FBB0.png")
         output.result.subscribe(onNext: {
             $0 ? self.dismiss(animated: true) : print("로그인 실패")
         }).disposed(by: disposeBag)
