@@ -5,7 +5,7 @@ import Moya
 import RxMoya
 
 final class Service {
-
+    // swiftlint:disable line_length
     let provider = MoyaProvider<API>(plugins: [MoyaLoggingPlugin()])
     func login(_ email: String, _ password: String) -> Single<StatusCodeResult> {
         return provider.rx.request(.login(email: email, password: password))

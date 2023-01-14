@@ -144,7 +144,7 @@ class SignUpVC: BaseVC {
         ].forEach { signUpContentView.addSubview($0) }
         passwordCheckTextField.addSubview(passwordCheckImageView)
     }
-
+    // swiftlint:disable function_body_length
     override func setLayout() {
         logoImageView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(111)
