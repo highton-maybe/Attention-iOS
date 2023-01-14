@@ -1,5 +1,5 @@
 name: "Todo"
-description: "할일이 있으신가요? 📗"
+description: "할일이 있으신가요?"
 body:
   - type: textarea
     attributes:
@@ -8,6 +8,7 @@ body:
         [개요] 할일에 관한 설명을 간단하게 작성해주세요.
       placeholder: |
         DropDownMenu 제작
+
   - type: textarea
     attributes:
       label: Work
@@ -15,8 +16,11 @@ body:
         [작업내용] 무슨 작업을 하셨나요?
       placeholder: |
         [ ] 저거 거시기 했어요 
+        
         [ ] 저거 거시기 거시기를 했습니다.
+        
         [ ] 저거 거시기를 끝냈을걸요?
+
   - type: textarea
     attributes:
       label: Additional
