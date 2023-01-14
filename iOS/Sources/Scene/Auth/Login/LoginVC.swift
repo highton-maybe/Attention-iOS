@@ -36,7 +36,7 @@ class LoginVC: BaseVC {
         )
         let output = viewModel.transform(input)
         output.result.subscribe(onNext: {
-            $0 ? print("로그인 성공"):print("로그인 실패")
+            $0 ? print(Token.accessToken):print("로그인 실패")
         }).disposed(by: disposeBag)
     }
     override func configureVC() {

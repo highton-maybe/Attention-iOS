@@ -26,6 +26,22 @@ final class Service {
             }
             .catch {[unowned self] in return .just(setNetworkError($0))}
     }
+    func addFestival(_ title: String, _ term: String, _ person: String) -> Single<StatusCodeResult> {
+        return provider.rx.request(.addFestival(title: title, content: person, date: term))
+            .filterSuccessfulStatusCodes()
+            .map { _ -> StatusCodeResult in
+                return .createOk
+            }
+            .catch {[unowned self] in return .just(setNetworkError($0))}
+    }
+    func addAutition(_ title: String, _ content: String, _ start: String, _ end: String) -> Single<StatusCodeResult> {
+        return provider.rx.request(.addAudition(title: title, content: content, start: start, end: end))
+            .filterSuccessfulStatusCodes()
+            .map { _ -> StatusCodeResult in
+                return .createOk
+            }
+            .catch {[unowned self] in return .just(setNetworkError($0))}
+    }
     func setNetworkError(_ error: Error) -> StatusCodeResult {
             print(error)
             print(error.localizedDescription)
