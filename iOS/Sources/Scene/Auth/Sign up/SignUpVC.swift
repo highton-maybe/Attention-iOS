@@ -8,7 +8,7 @@ class SignUpVC: BaseVC {
     private let viewModel = SignUpViewModel()
     private var passwordCheck = false
     private let logoImageView = UIImageView().then {
-        $0.image = AttentionAsset.Assets.logo.image
+        $0.image = AttentionAsset.Image.logo.image
     }
     private let signupLabel = UILabel().then {
         $0.text = "Sign up"
@@ -59,9 +59,6 @@ class SignUpVC: BaseVC {
         $0.setAuthButton(forButton: $0, title: "Sign up", color: "Sub3")
         $0.isEnabled = false
     }
-    override func viewWillAppear(_ animated: Bool) {
-        self.navigationItem.hidesBackButton = true
-    }
     override func configureVC() {
         nextButton.rx.tap.subscribe(onNext: { [self] in
             signUpScrollView.setContentOffset(CGPoint(x: view.frame.size.width, y: 0), animated: true)
@@ -87,12 +84,12 @@ class SignUpVC: BaseVC {
             .orEmpty
             .map { $0 != "" && $0 == self.passwordTextField.text }
             .subscribe(onNext: { [self] in
-//                passwordCheck = $0
+                passwordCheck = $0
                 switch $0 {
                 case true:
-                    passwordCheckImageView.image = AttentionAsset.check.image
+                    passwordCheckImageView.image = AttentionAsset.Image.check.image
                 default:
-                    passwordCheckImageView.image = AttentionAsset.nocheck.image
+                    passwordCheckImageView.image = AttentionAsset.Image.nocheck.image
                 }
             }).disposed(by: disposeBag)
     }
