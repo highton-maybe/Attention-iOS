@@ -15,43 +15,22 @@ struct Token {
         }
     }
 
-    static var saveRefreshToken: String?
-    static var refreshToken: String? {
-        get {
-            saveRefreshToken = UserDefaults.standard.string(forKey: "refreshToken")
-            return saveRefreshToken
-        }
-
-        set(newRefreshToken) {
-            UserDefaults.standard.set(newRefreshToken, forKey: "refreshToken")
-            UserDefaults.standard.synchronize()
-            saveRefreshToken = UserDefaults.standard.string(forKey: "refreshToken")
-        }
-    }
-
     static func removeToken() {
         accessToken = nil
-        refreshToken = nil
     }
 }
 
 enum Header {
-    case accessToken, tokenIsEmpty, refreshToken
+    case accessToken, tokenIsEmpty
 
     func header() -> [String: String]? {
         guard let token = Token.accessToken else {
             return ["Contect-Type": "application/json"]
         }
 
-        guard let refreshToken = Token.refreshToken else {
-            return ["Contect-Type": "application/json"]
-        }
-
         switch self {
         case .accessToken:
             return ["Authorization": "Bearer " + token, "Contect-Type": "application/json"]
-        case .refreshToken:
-            return ["Authorization": "Bearer " + refreshToken, "Contect-Type": "application/json"]
         case .tokenIsEmpty:
             return ["Contect-Type": "application/json"]
         }

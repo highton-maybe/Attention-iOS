@@ -17,30 +17,21 @@ class SignUpViewModel: BaseVM {
     struct Output {
         let result: BehaviorRelay<Bool>
         let signUpResult: PublishRelay<Bool>
-        let textsResult: BehaviorRelay<Bool>
     }
     private let disposeBag = DisposeBag()
 
     func transform(_ input: Input) -> Output {
         let api = Service()
         let result = BehaviorRelay<Bool>(value: false)
-        let textsResult = BehaviorRelay<Bool>(value: false)
         let signUpResult = PublishRelay<Bool>()
         let textField = Driver
             .combineLatest(input.name, input.email, input.password, input.passwordCheck, input.phoneNumber)
-        let text = Driver
-            .combineLatest(input.name, input.email, input.password, input.phoneNumber, input.major)
         let info = Driver
             .combineLatest(input.name, input.email, input.password, input.phoneNumber, input.major)
         textField.asObservable()
             .map { !$0.0.isEmpty && !$0.1.isEmpty && !$0.2.isEmpty && !$0.3.isEmpty && !$0.4.isEmpty }
             .bind(onNext: {
                 result.accept($0)
-            }).disposed(by: disposeBag)
-        text.asObservable()
-            .map { !$0.0.isEmpty && !$0.1.isEmpty && !$0.2.isEmpty && !$0.3.isEmpty && !$0.4.isEmpty }
-            .bind(onNext: {
-                textsResult.accept($0)
             }).disposed(by: disposeBag)
         input.signupButtonDidTap.asObservable()
             .withLatestFrom(info)
@@ -54,6 +45,6 @@ class SignUpViewModel: BaseVM {
                     signUpResult.accept(false)
                 }
             }).disposed(by: disposeBag)
-        return Output(result: result, signUpResult: signUpResult, textsResult: textsResult)
+        return Output(result: result, signUpResult: signUpResult)
     }
 }
