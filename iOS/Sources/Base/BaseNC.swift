@@ -26,10 +26,10 @@ class BaseNC: UINavigationController {
     func setNavigationBarAppearance() {
         let appearance = UINavigationBarAppearance()
         let appearance2 = UINavigationBarAppearance()
-        navigationBar.tintColor = AttentionAsset.gray800.color
+        navigationBar.tintColor = AttentionAsset.Assets.gray800.color
         appearance.setBackIndicatorImage(backButtonImage, transitionMaskImage: backButtonImage)
         appearance2.setBackIndicatorImage(backButtonImage, transitionMaskImage: backButtonImage)
-        appearance.backgroundColor = AttentionAsset.gray25.color
+        appearance.backgroundColor = AttentionAsset.Assets.gray25.color
 
         appearance.configureWithTransparentBackground()
         appearance2.configureWithDefaultBackground()
